@@ -24,7 +24,7 @@ data class ImageResponse(
     @SerializedName("height") val height: Int?,
     @SerializedName("hls") val hls: String?,
     @SerializedName("id") val id: String?,
-    @SerializedName("images") val imagerespons: List<ImageResponse>?,
+    @SerializedName("images") val images: List<ImageResponse>?,
     @SerializedName("images_count") val imagesCount: Int?,
     @SerializedName("in_gallery") val inGallery: Boolean?,
     @SerializedName("in_most_viral") val inMostViral: Boolean?,

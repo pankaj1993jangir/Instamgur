@@ -11,7 +11,14 @@ class ImgurRepoImpl : ImgurRepo {
         return try {
             val mutableList: MutableList<Image> = ArrayList()
             api.getFeedResponse(feed).data?.map { imageResponse ->
-                imageResponse.imagerespons?.get(0)?.link?.let {
+                val imageUrl =
+                    if (imageResponse.isAlbum == true && imageResponse.images != null) {
+                        val firstImage = imageResponse.images?.get(0)
+                        firstImage?.link
+                    } else {
+                        imageResponse.link
+                    }
+                imageUrl?.let {
                     mutableList.add(
                         Image(
                             imageResponse.id, imageResponse.title,

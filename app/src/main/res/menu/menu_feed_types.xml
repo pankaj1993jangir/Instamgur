@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/nav_top"
+            android:icon="@drawable/ic_top_trending"
+            android:title="Top" />
+
+
+    <item
+            android:id="@+id/nav_hot"
+            android:icon="@drawable/ic_hot"
+            android:title="Hot" />
+
+</menu>

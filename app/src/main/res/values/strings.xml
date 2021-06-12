@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Instamgur</string>
+    <string name="arg_feed_type" translatable="false">FEED_TYPE</string>
 </resources>
