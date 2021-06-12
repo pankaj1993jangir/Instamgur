@@ -6,7 +6,7 @@ import com.pj.instamgur.domain.entity.repository.ImgurRepo
 import java.lang.Exception
 
 class ImgurRepoImpl : ImgurRepo {
-    val api by lazy { ImgurApiClient.getInstance().api }
+    private val api by lazy { ImgurApiClient.getInstance().api }
     override suspend fun getFeedList(feed: String): List<Image>? {
         return try {
             val mutableList: MutableList<Image> = ArrayList()
@@ -39,7 +39,7 @@ class ImgurRepoImpl : ImgurRepo {
         }
     }
 
-    fun isVideoUrl(url: String?): Boolean {
+    private fun isVideoUrl(url: String?): Boolean {
         return url?.endsWith("mp4") == true
     }
 

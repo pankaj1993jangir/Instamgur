@@ -15,4 +15,9 @@ interface ImgurApiService {
 
     @GET("tags")
     suspend fun getTags(): TagResponse
+
+    @GET("gallery/t/{tag}")
+    suspend fun getTagGallery(
+        @Path("tag") tag: String
+    ): TagResponse
 }
