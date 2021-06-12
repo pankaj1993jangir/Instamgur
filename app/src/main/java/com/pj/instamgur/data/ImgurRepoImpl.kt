@@ -1,15 +1,16 @@
 package com.pj.instamgur.data
 
 import com.pj.instamgur.data.service.ImgurApiClient
-import com.pj.instamgur.domain.entity.Image
-import com.pj.instamgur.domain.entity.repository.ImgurRepo
+import com.pj.instamgur.domain.entity.Feed
+import com.pj.instamgur.domain.entity.Tag
+import com.pj.instamgur.domain.repository.ImgurRepo
 import java.lang.Exception
 
 class ImgurRepoImpl : ImgurRepo {
     private val api by lazy { ImgurApiClient.getInstance().api }
-    override suspend fun getFeedList(feed: String): List<Image>? {
+    override suspend fun getFeedList(feed: String): List<Feed> {
+        val mutableList: MutableList<Feed> = ArrayList()
         return try {
-            val mutableList: MutableList<Image> = ArrayList()
             api.getFeedResponse(feed).data?.map { imageResponse ->
                 val imageUrl =
                     if (imageResponse.isAlbum == true && imageResponse.images != null) {
@@ -25,7 +26,7 @@ class ImgurRepoImpl : ImgurRepo {
                 if (!isVideoUrl(imageUrl)) {
                     imageUrl?.let {
                         mutableList.add(
-                            Image(
+                            Feed(
                                 imageResponse.id, imageResponse.title,
                                 it
                             )
@@ -35,9 +36,33 @@ class ImgurRepoImpl : ImgurRepo {
             }
             mutableList
         } catch (e: Exception) {
-            null
+            mutableList
         }
     }
+
+    override suspend fun getStoryTags(): List<Tag> {
+        val mutableList: MutableList<Tag> = ArrayList()
+        return try {
+            api.getTags().data?.tags?.map { tagResponse ->
+                if (tagResponse.displayName != null && tagResponse.backgroundHash != null) {
+                    mutableList.add(
+                        Tag(
+                            tagResponse.displayName,
+                            generateStoryImageUrl(tagResponse.backgroundHash)
+                        )
+                    )
+                }
+            }
+            mutableList
+        } catch (e: Exception) {
+            ArrayList()
+        }
+    }
+
+    private fun generateStoryImageUrl(hash: String): String {
+        return "https://i.imgur.com/${hash}.jpg"
+    }
+
 
     private fun isVideoUrl(url: String?): Boolean {
         return url?.endsWith("mp4") == true

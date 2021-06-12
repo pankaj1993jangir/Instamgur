@@ -8,27 +8,37 @@
             android:layout_height="match_parent"
             tools:context=".presentation.view.MainActivity">
 
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_story_tags"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        <fragment
+                android:id="@+id/fragment_nav_container"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="?android:attr/windowBackground"
+                android:paddingBottom="56dp"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toTopOf="@id/bnv_feed_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_story_tags"
+                app:navGraph="@navigation/navigation_feed" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bnv_feed_bar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/windowBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:menu="@menu/menu_feed_types" />
-
-        <fragment
-                android:id="@+id/fragment_nav_container"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:defaultNavHost="true"
-                app:layout_constraintBottom_toTopOf="@id/bnv_feed_bar"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navGraph="@navigation/navigation_feed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

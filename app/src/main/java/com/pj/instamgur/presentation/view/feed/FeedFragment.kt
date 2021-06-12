@@ -1,4 +1,4 @@
-package com.pj.instamgur.presentation.view
+package com.pj.instamgur.presentation.view.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pj.instamgur.R
 import com.pj.instamgur.databinding.FragmentFeedBinding
+import com.pj.instamgur.presentation.view.feed.FeedAdapter
 import com.pj.instamgur.presentation.enum.FeedType
 import com.pj.instamgur.presentation.viewmodel.FeedViewModel
 
@@ -41,7 +42,7 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.images.observe(viewLifecycleOwner) {
+        viewModel.feed.observe(viewLifecycleOwner) {
             feedAdapter.updateItems(it)
         }
     }

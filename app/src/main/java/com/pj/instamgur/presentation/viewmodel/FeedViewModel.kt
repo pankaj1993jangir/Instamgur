@@ -5,22 +5,31 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pj.instamgur.data.ImgurRepoImpl
-import com.pj.instamgur.domain.entity.Image
+import com.pj.instamgur.domain.entity.Feed
+import com.pj.instamgur.domain.entity.Tag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FeedViewModel : ViewModel() {
-    private val _images = MutableLiveData<List<Image>>()
-    val images: LiveData<List<Image>> = _images
 
     private val imgurRepo by lazy { ImgurRepoImpl.getInstance() }
 
+    private val _tags = MutableLiveData<List<Tag>>()
+    val tags: LiveData<List<Tag>> = _tags
+
+    private val _feed = MutableLiveData<List<Feed>>()
+    val feed: LiveData<List<Feed>> = _feed
+
     fun fetchFeed(feed: String) = viewModelScope.launch(Dispatchers.IO) {
         when (feed) {
-            "top" -> _images.postValue(imgurRepo.getFeedList("top"))
-            "hot" -> _images.postValue(imgurRepo.getFeedList("hot"))
-            else -> _images.postValue(imgurRepo.getFeedList("top"))
+            "top" -> _feed.postValue(imgurRepo.getFeedList("top"))
+            "hot" -> _feed.postValue(imgurRepo.getFeedList("hot"))
+            else -> _feed.postValue(imgurRepo.getFeedList("top"))
 
         }
+    }
+
+    fun fetchTags() = viewModelScope.launch(Dispatchers.IO) {
+        _tags.postValue(imgurRepo.getStoryTags())
     }
 }
