@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/nav_top"
-            android:name="com.pj.instamgur.mvvm.view.FeedFragment">
+            android:name="com.pj.instamgur.presentation.view.FeedFragment">
         <argument
                 android:name="@string/arg_feed_type"
                 android:defaultValue="top"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
             android:id="@+id/nav_hot"
-            android:name="com.pj.instamgur.mvvm.view.FeedFragment">
+            android:name="com.pj.instamgur.presentation.view.FeedFragment">
         <argument
                 android:name="@string/arg_feed_type"
                 android:defaultValue="hot"

@@ -13,24 +13,34 @@ class ImgurRepoImpl : ImgurRepo {
             api.getFeedResponse(feed).data?.map { imageResponse ->
                 val imageUrl =
                     if (imageResponse.isAlbum == true && imageResponse.images != null) {
-                        val firstImage = imageResponse.images?.get(0)
-                        firstImage?.link
+                        val url = imageResponse.images[0].link
+                        //if (!isVideoUrl(url)) {
+                        url
+                        /*}else {
+                            imageResponse.images?.get(0)?.gifv
+                        }*/
                     } else {
                         imageResponse.link
                     }
-                imageUrl?.let {
-                    mutableList.add(
-                        Image(
-                            imageResponse.id, imageResponse.title,
-                            it
+                if (!isVideoUrl(imageUrl)) {
+                    imageUrl?.let {
+                        mutableList.add(
+                            Image(
+                                imageResponse.id, imageResponse.title,
+                                it
+                            )
                         )
-                    )
+                    }
                 }
             }
             mutableList
         } catch (e: Exception) {
             null
         }
+    }
+
+    fun isVideoUrl(url: String?): Boolean {
+        return url?.endsWith("mp4") == true
     }
 
     companion object {

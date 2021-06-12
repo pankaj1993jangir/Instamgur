@@ -1,4 +1,4 @@
-package com.pj.instamgur.mvvm.view
+package com.pj.instamgur.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.pj.instamgur.R
 import com.pj.instamgur.databinding.ActivityMainBinding
-import com.pj.instamgur.mvvm.viewmodel.FeedViewModel
+import com.pj.instamgur.presentation.viewmodel.FeedViewModel
 
 class MainActivity : AppCompatActivity() {
 

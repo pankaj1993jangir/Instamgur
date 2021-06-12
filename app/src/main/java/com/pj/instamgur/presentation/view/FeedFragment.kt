@@ -1,23 +1,25 @@
-package com.pj.instamgur.mvvm.view
+package com.pj.instamgur.presentation.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pj.instamgur.R
 import com.pj.instamgur.databinding.FragmentFeedBinding
-import com.pj.instamgur.mvvm.enum.FeedType
-import com.pj.instamgur.mvvm.viewmodel.FeedViewModel
+import com.pj.instamgur.presentation.enum.FeedType
+import com.pj.instamgur.presentation.viewmodel.FeedViewModel
 
 class FeedFragment : Fragment() {
 
     private val viewModel: FeedViewModel by viewModels()
     private lateinit var feedType: String
     private lateinit var binding: FragmentFeedBinding
+    private val feedAdapter by lazy {
+        FeedAdapter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,9 @@ class FeedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
+        binding = FragmentFeedBinding.inflate(inflater, container, false)
+        binding.rvFeed.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFeed.adapter = feedAdapter
         return binding.root
     }
 
@@ -38,7 +42,7 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.images.observe(viewLifecycleOwner) {
-            Log.e("RESPONSE", it.toString())
+            feedAdapter.updateItems(it)
         }
     }
 }

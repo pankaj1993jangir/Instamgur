@@ -1,4 +1,4 @@
-package com.pj.instamgur.mvvm.viewmodel
+package com.pj.instamgur.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
