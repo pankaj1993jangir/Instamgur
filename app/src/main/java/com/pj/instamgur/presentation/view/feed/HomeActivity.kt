@@ -1,4 +1,4 @@
-package com.pj.instamgur.presentation.view
+package com.pj.instamgur.presentation.view.feed
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,19 +11,19 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pj.instamgur.R
-import com.pj.instamgur.databinding.ActivityMainBinding
+import com.pj.instamgur.databinding.ActivityHomeBinding
 import com.pj.instamgur.presentation.view.story.TagStoryAdapter
 import com.pj.instamgur.presentation.viewmodel.FeedViewModel
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private val viewModel: FeedViewModel by viewModels()
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHomeBinding
     private val tagStoryAdapter by lazy { TagStoryAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         setupNavigationBar()
         setUpTagStoryRecyclerView()
         setUpObserver()

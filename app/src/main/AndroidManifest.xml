@@ -11,7 +11,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Instamgur">
-        <activity android:name=".presentation.view.MainActivity">
+        <activity android:name=".presentation.view.gallery.GalleryActivity"></activity>
+        <activity android:name=".presentation.view.feed.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

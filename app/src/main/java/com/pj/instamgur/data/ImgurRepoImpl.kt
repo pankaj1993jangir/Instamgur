@@ -44,13 +44,44 @@ class ImgurRepoImpl : ImgurRepo {
         val mutableList: MutableList<Tag> = ArrayList()
         return try {
             api.getTags().data?.tags?.map { tagResponse ->
-                if (tagResponse.displayName != null && tagResponse.backgroundHash != null) {
+                if (tagResponse.displayName != null && tagResponse.backgroundHash != null
+                    && tagResponse.name != null
+                ) {
                     mutableList.add(
                         Tag(
+                            tagResponse.name,
                             tagResponse.displayName,
                             generateStoryImageUrl(tagResponse.backgroundHash)
                         )
                     )
+                }
+            }
+            mutableList
+        } catch (e: Exception) {
+            ArrayList()
+        }
+    }
+
+    override suspend fun getGalleryFeed(tag: String): List<Feed> {
+        val mutableList: MutableList<Feed> = ArrayList()
+        return try {
+            api.getTagGallery(tag).data?.items?.map { imageResponse ->
+                val imageUrl =
+                    if (imageResponse.isAlbum == true && imageResponse.images != null) {
+                        val url = imageResponse.images[0].link
+                        url
+                    } else {
+                        imageResponse.link
+                    }
+                if (!isVideoUrl(imageUrl)) {
+                    imageUrl?.let {
+                        mutableList.add(
+                            Feed(
+                                imageResponse.id, imageResponse.title,
+                                it
+                            )
+                        )
+                    }
                 }
             }
             mutableList

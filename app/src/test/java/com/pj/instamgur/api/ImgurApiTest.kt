@@ -18,20 +18,25 @@ class ImgurApiTest {
 
     @Test
     fun `validate feed response`() {
-
         runBlocking {
             val response = apiService.getFeedResponse("hot")
-            println(response)
             Assert.assertNotNull(response)
         }
     }
 
     @Test
     fun `validate tag response`() {
-
         runBlocking {
             val response = apiService.getTags()
-            println(response)
+            Assert.assertNotNull(response)
+        }
+    }
+
+
+    @Test
+    fun `validate tag gallery response`() {
+        runBlocking {
+            val response = apiService.getTagGallery("burger")
             Assert.assertNotNull(response)
         }
     }
