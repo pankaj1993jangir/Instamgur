@@ -9,7 +9,7 @@ import com.pj.instamgur.R
 import com.pj.instamgur.databinding.ActivityGalleryBinding
 import com.pj.instamgur.presentation.viewmodel.GalleryViewModel
 
-private const val DEFAULT_AUTO_SCROLL_DURATION_IN_MILLI = 4000L
+private const val DEFAULT_AUTO_SCROLL_DURATION_IN_MILLI = 3000L
 
 class GalleryActivity : AppCompatActivity() {
 
