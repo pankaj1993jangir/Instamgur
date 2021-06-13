@@ -8,9 +8,6 @@ import android.os.Build
 class NetworkUtil {
     companion object {
         fun isNetworkAvailable(context: Context): Boolean {
-            if (context == null) {
-                return false
-            }
             val connectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
