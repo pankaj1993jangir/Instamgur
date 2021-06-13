@@ -28,7 +28,7 @@ class GalleryViewPagerAdapter : RecyclerView.Adapter<GalleryViewPagerAdapter.Vie
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: GalleryViewPagerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
         holder.setViewModel(item)
     }

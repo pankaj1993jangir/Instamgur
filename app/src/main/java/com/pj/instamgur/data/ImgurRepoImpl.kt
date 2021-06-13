@@ -1,5 +1,6 @@
 package com.pj.instamgur.data
 
+import androidx.annotation.VisibleForTesting
 import com.pj.instamgur.data.service.ImgurApiClient
 import com.pj.instamgur.domain.entity.Feed
 import com.pj.instamgur.domain.entity.Tag
@@ -43,7 +44,7 @@ class ImgurRepoImpl : ImgurRepo {
     override suspend fun getStoryTags(): List<Tag> {
         val mutableList: MutableList<Tag> = ArrayList()
         return try {
-            api.getTags().data?.tags?.map { tagResponse ->
+            api.getTags().data.tags.map { tagResponse ->
                 if (tagResponse.displayName != null && tagResponse.backgroundHash != null
                     && tagResponse.name != null
                 ) {
@@ -90,12 +91,13 @@ class ImgurRepoImpl : ImgurRepo {
         }
     }
 
-    private fun generateStoryImageUrl(hash: String): String {
+    @VisibleForTesting
+    fun generateStoryImageUrl(hash: String): String {
         return "https://i.imgur.com/${hash}.jpg"
     }
 
-
-    private fun isVideoUrl(url: String?): Boolean {
+    @VisibleForTesting
+    fun isVideoUrl(url: String?): Boolean {
         return url?.endsWith("mp4") == true
     }
 

@@ -13,7 +13,6 @@ interface ImgurApiService {
         @Path("feed") feed: String
     ): FeedResponse
 
-
     @GET("tags")
     suspend fun getTags(): TagsResponse
 
