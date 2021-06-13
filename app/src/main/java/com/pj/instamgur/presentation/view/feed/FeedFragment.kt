@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pj.instamgur.R
+import com.pj.instamgur.data.util.NetworkUtil
 import com.pj.instamgur.databinding.FragmentFeedBinding
 import com.pj.instamgur.presentation.view.feed.FeedAdapter
 import com.pj.instamgur.presentation.enum.FeedType
@@ -26,7 +28,11 @@ class FeedFragment : Fragment() {
         super.onCreate(savedInstanceState)
         feedType =
             arguments?.getString(resources.getString(R.string.arg_feed_type)) ?: FeedType.TOP.name
-        viewModel.fetchFeed(feedType)
+        if (NetworkUtil.isNetworkAvailable(requireContext())) {
+            viewModel.fetchFeed(feedType)
+        } else {
+            Toast.makeText(requireContext(), R.string.connet_internet, Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onCreateView(

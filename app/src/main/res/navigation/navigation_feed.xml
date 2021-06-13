@@ -9,7 +9,7 @@
             android:name="com.pj.instamgur.presentation.view.feed.FeedFragment">
         <argument
                 android:name="@string/arg_feed_type"
-                android:defaultValue="top"
+                android:defaultValue="TOP"
                 app:argType="string" />
     </fragment>
     <fragment
@@ -17,7 +17,7 @@
             android:name="com.pj.instamgur.presentation.view.feed.FeedFragment">
         <argument
                 android:name="@string/arg_feed_type"
-                android:defaultValue="hot"
+                android:defaultValue="HOT"
                 app:argType="string" />
     </fragment>
 </navigation>

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Instamgur</string>
     <string name="arg_feed_type" translatable="false">FEED_TYPE</string>
+    <string name="connet_internet">Connect to internet and Retry</string>
 </resources>

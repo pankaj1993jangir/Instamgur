@@ -2,6 +2,7 @@ package com.pj.instamgur.presentation.view.feed
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -11,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pj.instamgur.R
+import com.pj.instamgur.data.util.NetworkUtil
 import com.pj.instamgur.databinding.ActivityHomeBinding
 import com.pj.instamgur.presentation.view.story.TagStoryAdapter
 import com.pj.instamgur.presentation.viewmodel.FeedViewModel
@@ -31,7 +33,11 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.fetchTags()
+        if (NetworkUtil.isNetworkAvailable(applicationContext)) {
+            viewModel.fetchTags()
+        } else {
+            Toast.makeText(applicationContext, R.string.connet_internet, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun setUpObserver() {

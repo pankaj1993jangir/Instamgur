@@ -1,11 +1,13 @@
 package com.pj.instamgur.presentation.view.gallery
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.pj.instamgur.R
+import com.pj.instamgur.data.util.NetworkUtil
 import com.pj.instamgur.databinding.ActivityGalleryBinding
 import com.pj.instamgur.presentation.viewmodel.GalleryViewModel
 
@@ -47,7 +49,7 @@ class GalleryActivity : AppCompatActivity() {
             super.onPageSelected(position)
             if (pageIndex > position) {
                 binding.pvStoryTimer.startPrev()
-            }else{
+            } else {
                 binding.pvStoryTimer.startNext()
             }
             pageIndex = position
@@ -65,7 +67,12 @@ class GalleryActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         tag?.let {
-            viewModel.fetchGalleryFeed(it)
+            if (NetworkUtil.isNetworkAvailable(applicationContext)) {
+                viewModel.fetchGalleryFeed(it)
+            } else {
+                Toast.makeText(applicationContext, R.string.connet_internet, Toast.LENGTH_LONG)
+                    .show()
+            }
         }
     }
 
